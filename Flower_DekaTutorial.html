@@ -1,0 +1,163 @@
+<!--=========================-!>
+Mau custom web ucapan online & tanpa watermark? Order Aja di Deka Tutorial !! (DM IG untuk order)
++ Youtube: Deka Tutorial
++ Tiktok: @deka_tutorial
++ Instagram: deka_tutorial
+<-===========================-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Special For You</title>
+    <script src="https://dekatutorial.github.io/flwr/s.js"></script>
+    <style>
+      .flower {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        display: inline-block;
+        font-size: 60px;
+      }
+      .flower:hover {
+        transform: scale(1.2) rotate(15deg);
+      }
+      .flower.bounce {
+        animation: bounce 0.6s ease;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        25% { transform: scale(1.1) rotate(-10deg); }
+        50% { transform: scale(1.2) rotate(15deg); }
+        75% { transform: scale(1.1) rotate(-10deg); }
+      }
+
+      /* Override animasi bunga yang muncul */
+      .petal, .petals {
+        animation: petalFloat 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+      }
+
+      @keyframes petalFloat {
+        0% {
+          opacity: 0;
+          transform: translateY(0) scale(0.5) !important;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-300px) scale(0.3) !important;
+        }
+      }
+
+      /* Smooth fade untuk semua animasi */
+      * {
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+      }
+
+      /* Ganti warna bunga biru ke kuning (bunga matahari) */
+      svg circle[fill="#4DD0E1"],
+      svg circle[fill="#00BCD4"],
+      svg circle[fill="#0097A7"],
+      circle[fill*="0097A7"],
+      circle[fill*="00BCD4"],
+      circle[fill*="4DD0E1"] {
+        fill: #FFD700 !important;
+      }
+
+      /* Ganti warna rumput/daun ke hijau atau gold */
+      svg path[fill="#4CAF50"],
+      svg path[fill="#66BB6A"],
+      svg path[fill="#81C784"],
+      path[fill*="4CAF50"],
+      path[fill*="66BB6A"],
+      path[fill*="81C784"] {
+        fill: #FFD700 !important;
+      }
+
+      /* Ganti semua elemen dengan warna cyan/biru ke kuning */
+      [fill="#00BCD4"],
+      [fill="#0097A7"],
+      [fill="#4DD0E1"],
+      [fill="rgb(0, 188, 212)"],
+      [fill="rgb(0, 150, 167)"],
+      [fill="rgb(77, 208, 225)"] {
+        fill: #FFD700 !important;
+      }
+
+      /* Pastikan stroke juga ikut */
+      [stroke="#00BCD4"],
+      [stroke="#0097A7"],
+      [stroke="#4DD0E1"] {
+        stroke: #FFD700 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="open">
+      <i class="flower" id="flowerBtn">🌻</i>
+      <span>Klik bunga matahari nya</span>
+    </div>
+
+    <script>
+      ucapan = `Hai Ika, aku punya bunga buat kamu nii, diterima yaa? 🌻`;
+      musik = ``;
+      nomorWhatsapp = ``;
+      idTelegram = ``;
+
+      // Fungsi untuk mengganti warna bunga biru dan rumput ke kuning
+      function replaceFlowerColors() {
+        // Cari semua SVG dan elemen dengan warna biru/hijau
+        const svgs = document.querySelectorAll('svg *');
+        svgs.forEach(el => {
+          const fill = el.getAttribute('fill');
+          const stroke = el.getAttribute('stroke');
+          
+          // Warna biru cyan ke kuning
+          if (fill && (fill.includes('0097A7') || fill.includes('00BCD4') || fill.includes('4DD0E1') || fill.toLowerCase() === '#00bcd4')) {
+            el.setAttribute('fill', '#FFD700');
+          }
+          if (stroke && (stroke.includes('0097A7') || stroke.includes('00BCD4') || stroke.includes('4DD0E1'))) {
+            el.setAttribute('stroke', '#FFD700');
+          }
+          
+          // Warna hijau ke kuning
+          if (fill && (fill.includes('4CAF50') || fill.includes('66BB6A') || fill.includes('81C784'))) {
+            el.setAttribute('fill', '#FFD700');
+          }
+        });
+
+        // Cari semua canvas dan ubah dengan filter/effect jika ada
+        const canvas = document.querySelectorAll('canvas');
+        canvas.forEach(c => {
+          // Jika canvas, tambahkan filter untuk mengubah warna
+          if (c.style) {
+            c.style.filter = 'hue-rotate(45deg) saturate(1.5)';
+          }
+        });
+      }
+
+      // Monitor perubahan DOM untuk menangkap elemen baru
+      const observer = new MutationObserver(function(mutations) {
+        replaceFlowerColors();
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['fill', 'stroke', 'style']
+      });
+
+      // Jalankan fungsi setelah DekaTutorial selesai render
+      setTimeout(replaceFlowerColors, 500);
+      setTimeout(replaceFlowerColors, 1000);
+      setTimeout(replaceFlowerColors, 2000);
+
+      DekaTutorial(ucapan, musik, nomorWhatsapp, idTelegram);
+    </script>
+  </body>
+</html>
